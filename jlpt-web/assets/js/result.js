@@ -31,96 +31,10 @@ const quotes = [
     "続ける人が勝つ。\n(The one who continues wins.)",
     "Don’t stop now, kamu sudah sejauh ini.",
     "諦めなければ道はある。\n(If you don’t give up, there is a way.)",
-    "Progress > Perfection.",
+    " Progress > Perfection.",
     "もう一度やってみよう。\n(Let’s try one more time.)",
     "Kegagalan itu data, bukan identitas.",
-    "努力は裏切らない。\n(Effort never betrays.)",
-    "You’re closer than you think.",
-    "今日の努力は未来の力。\n(Today’s effort is tomorrow’s power.)",
-    "Belajar itu investasi jangka panjang.",
-    "Keep going, your future self will thank you.",
-    "小さな進歩も大事。\n(Small progress matters.)",
-    "Gagal JLPT? berarti kamu sudah berani mencoba.",
-    "Try again, stronger this time.",
-    "継続すれば必ず伸びる。\n(If you continue, you will grow.)",
-    "Kamu bukan gagal, kamu sedang proses.",
-    "Every mistake is a lesson.",
-    "できるまでやればいい。\n(Just keep going until you can.)",
-    "Belajar pelan tapi pasti.",
-    "Don’t compare, just improve.",
-    "昨日の自分より成長しよう。\n(Be better than yesterday.)",
-    "Kegagalan itu guru terbaik.",
-    "Success is built on retries.",
-    "あきらめるな。\n(Don’t give up.)",
-    "Ulangi lagi, pasti bisa.",
-    "You got this.",
-    "努力の積み重ねが未来を作る。\n(Accumulated effort builds the future.)",
-    "Pelan gak apa, berhenti itu masalah.",
-    "Failure is part of mastery.",
-    "もう少し頑張ろう。\n(Let’s push a little more.)",
-    "Belajar tiap hari walau sedikit.",
-    "Your time will come.",
-    "夢は逃げない。\n(Dreams don’t run away.)",
-    "Gagal sekarang, sukses nanti.",
-    "Consistency beats talent.",
-    "やればできる。\n(If you do it, you can.)",
-    "Terus belajar, jangan menyerah.",
-    "Every expert was once a beginner.",
-    "一歩一歩進め。\n(Go step by step.)",
-    "Kamu sedang berkembang.",
-    "Hard work always pays off.",
-    "信じて続けよう。\n(Believe and continue.)",
-    "Jangan takut gagal lagi.",
-    "Try smarter, not just harder.",
-    "未来は自分で作る。\n(You create your future.)",
-    "Belajarからkesalahan.",
-    "Fall seven, rise eight.",
-    "失敗しても前進。\n(Even failing is forward.)",
-    "Kamu lebih kuat dari hasil test.",
-    "Keep learning, keep growing.",
-    "夢に向かって進め。\n(Move toward your dream.)",
-    "Fokus proses, bukan hasil.",
-    "Retry is part of success.",
-    "続けることが鍵。\n(Continuing is the key.)",
-    "Kegagalan hari ini = kemenangan besok.",
-    "Don’t quit before it works.",
-    "努力は必ず報われる。\n(Effort will be rewarded.)",
-    "Belajar itu perjalanan panjang.",
-    "Stay consistent.",
-    "できなくてもいい、やることが大事。\n(It’s okay if you can’t, trying matters.)",
-    "Kamu hampir sampai.",
-    "One more try.",
-    "挑戦し続けよう。\n(Keep challenging yourself.)",
-    "Jangan berhenti sekarang.",
-    "Growth takes time.",
-    "前向きに行こう。\n(Let’s move forward positively.)",
-    "Kamu sedang menuju sukses.",
-    "Never stop improving.",
-    "夢をあきらめないで。\n(Don’t give up your dream.)",
-    "Gagal itu bagian dari cerita sukses.",
-    "Push yourself.",
-    "一日一歩。\n(One step a day.)",
-    "Pelan tapi naik.",
-    "You’re doing great.",
-    "頑張った分だけ成長する。\n(You grow as much as you try.)",
-    "Kamu pasti bisa.",
-    "Keep moving forward.",
-    "自分を信じて。\n(Believe in yourself.)",
-    "Ulangi sampai berhasil.",
-    "Stay focused.",
-    "失敗は終わりじゃない。\n(Failure is not the end.)",
-    "Kamu sedang belajar, bukan kalah.",
-    "Try again tomorrow.",
-    "努力は未来への投資。\n(Effort is an investment in the future.)",
-    "Semangat terus.",
-    "Success needs patience.",
-    "一度の失敗で終わらない。\n(One failure doesn’t end everything.)",
-    "Kamu semakin dekat.",
-    "Keep pushing.",
-    "夢は叶う。\n(Dreams come true.)",
-    "Gagal hari ini, lulus nanti.",
-    "Never give up on your goal.",
-    "最後までやり抜こう。\n(See it through to the end.)"
+    "努力は裏切らない。\n(Effort never betrays.)"
 ];
 
 let globalReportData = null;
@@ -146,15 +60,12 @@ async function gradeTest(user, level, masterQuestions, userAnswers) {
     const total = masterQuestions.length;
     const score = Math.round((correct / total) * 100);
     
-    // Save to History before cleaning
     saveHistory(level, score);
     
-    // Clean states so we can't refresh result
     localStorage.removeItem('jlpt_target_level');
     localStorage.removeItem('jlpt_test_answers');
     localStorage.removeItem('jlpt_timer_end');
     
-    // Render UI
     document.getElementById('loadingBox').style.display = 'none';
     document.getElementById('resultContent').style.display = 'block';
     
@@ -186,10 +97,8 @@ async function gradeTest(user, level, masterQuestions, userAnswers) {
 
     globalReportData = { user, level, score, correctContext, incorrectContext, correct, total };
     
-    // Attempt Worker Email Sync
     sendEmailReport(globalReportData);
     
-    // Bind PDF
     document.getElementById('downloadPdfBtn').addEventListener('click', generatePdf);
 }
 
@@ -211,7 +120,7 @@ function renderChart(correct, incorrect) {
             labels: ['Correct', 'Incorrect'],
             datasets: [{
                 data: [correct, incorrect],
-                backgroundColor: ['#8ebd8e', '#d97b7b'], // success / danger
+                backgroundColor: ['#8ebd8e', '#d97b7b'], 
                 borderWidth: 0
             }]
         },
@@ -220,9 +129,6 @@ function renderChart(correct, incorrect) {
             maintainAspectRatio: false,
             plugins: {
                 legend: { position: 'bottom' }
-            },
-            animation: {
-                onComplete: function() {} // Chart is rendered
             }
         }
     });
@@ -232,195 +138,203 @@ function renderChart(correct, incorrect) {
 // HELPER FUNCTIONS FOR PDF GENERATION
 // -------------------------------------------------------------
 
-function addWatermark(doc) {
+function generateWatermark(doc) {
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
     const text = "test omoshiro japan";
     
-    doc.setTextColor(180, 180, 180);
-    doc.setFontSize(24);
-    
-    // Set opacity using GState
     if (doc.GState) {
-        const gState = new doc.GState({ opacity: 0.15 });
-        doc.setGState(gState);
+        doc.setGState(new doc.GState({ opacity: 0.12 }));
     }
+    doc.setTextColor(150, 150, 150);
+    doc.setFontSize(30);
 
-    // Grid repeated pattern
-    for (let x = -50; x < pageWidth + 50; x += 100) {
-        for (let y = 0; y < pageHeight + 50; y += 80) {
+    const xStep = 100;
+    const yStep = 80;
+    
+    // Pattern repeated ~20 times
+    for (let x = -50; x < pageWidth + 50; x += xStep) {
+        for (let y = 0; y < pageHeight + 50; y += yStep) {
             doc.text(text, x, y, { angle: 45 });
         }
     }
-
-    // Reset opacity and color
+    
+    // Reset Graphics State
     if (doc.GState) {
-        const normalState = new doc.GState({ opacity: 1.0 });
-        doc.setGState(normalState);
+        doc.setGState(new doc.GState({ opacity: 1.0 }));
     }
     doc.setTextColor(0, 0, 0);
 }
 
-function addSectionTitle(doc, title, y) {
+function generateScoreChart(doc, yPos) {
+    const total = globalReportData.total;
+    const correct = globalReportData.correct;
+    const correctPct = Math.round((correct / total) * 100);
+    const incorrectPct = 100 - correctPct;
+
     doc.setFontSize(14);
     doc.setFont(undefined, 'bold');
-    doc.text(title, 14, y);
-    doc.setDrawColor(200, 200, 200);
-    doc.line(14, y + 2, doc.internal.pageSize.getWidth() - 14, y + 2);
-    doc.setFont(undefined, 'normal');
+    doc.setTextColor(0, 0, 0);
+    doc.text("Performance Overview", 14, yPos);
+    
+    yPos += 12;
+
+    const barWidth = Math.max(doc.internal.pageSize.getWidth() - 28, 100);
+    const barHeight = 16;
+    const startX = 14;
+
+    const correctWidth = (correctPct / 100) * barWidth;
+    
+    // Correct part (Green)
+    doc.setFillColor(114, 186, 114); // #72ba72
+    doc.rect(startX, yPos, correctWidth, barHeight, 'F');
+    
+    // Incorrect part (Red)
+    doc.setFillColor(217, 104, 104); // #d96868
+    doc.rect(startX + correctWidth, yPos, barWidth - correctWidth, barHeight, 'F');
+
+    // Labels
+    doc.setFontSize(11);
+    doc.setFont(undefined, 'bold');
+    
+    // Correct Label if space accommodates
+    if (correctPct > 10) {
+        doc.setTextColor(255, 255, 255);
+        doc.text(`${correctPct}% Correct`, startX + 5, yPos + 11);
+    }
+    
+    // Incorrect Label if space accommodates
+    if (incorrectPct > 10) {
+        doc.setTextColor(255, 255, 255);
+        const textWidth = doc.getTextWidth(`${incorrectPct}% Incorrect`);
+        doc.text(`${incorrectPct}% Incorrect`, startX + barWidth - textWidth - 5, yPos + 11);
+    }
+    
+    doc.setTextColor(0, 0, 0);
+    return yPos + 35; 
+}
+
+function generateCorrectTable(doc, startY) {
+    doc.setFontSize(16);
+    doc.setFont(undefined, 'bold');
+    doc.setTextColor(40, 167, 69); // Green
+    doc.text("Correct Answers", 14, startY);
+    
+    const tableData = globalReportData.correctContext.map(q => [
+        `Q${q.id}`,
+        q.question,
+        q.answer,
+        '✔ Correct'
+    ]);
+
+    doc.autoTable({
+        startY: startY + 8,
+        head: [['ID', 'Question', 'Selected Answer', 'Status']],
+        body: tableData,
+        theme: 'grid',
+        styles: { fontSize: 10, cellPadding: 5, overflow: 'linebreak' },
+        columnStyles: { 
+            0: { cellWidth: 15 }, 
+            1: { cellWidth: 'auto' }, 
+            2: { cellWidth: 40 }, 
+            3: { cellWidth: 25, textColor: [40, 167, 69], fontStyle: 'bold' } 
+        },
+        headStyles: { fillColor: [142, 189, 142], textColor: 255 },
+        alternateRowStyles: { fillColor: [247, 252, 247] }
+    });
+}
+
+function generateWrongTable(doc, startY) {
+    const pageHeight = doc.internal.pageSize.getHeight();
+    if (startY > pageHeight - 40) {
+        doc.addPage();
+        startY = 25;
+    }
+
+    doc.setFontSize(16);
+    doc.setFont(undefined, 'bold');
+    doc.setTextColor(220, 53, 69); // Red
+    doc.text("Incorrect Answers", 14, startY);
+    
+    const tableData = globalReportData.incorrectContext.map(q => [
+        `Q${q.id}`,
+        q.question,
+        q.userAnswer,
+        q.answer,
+        '✖ Wrong'
+    ]);
+
+    doc.autoTable({
+        startY: startY + 8,
+        head: [['ID', 'Question', 'Your Answer', 'Correct Answer', 'Status']],
+        body: tableData,
+        theme: 'grid',
+        styles: { fontSize: 10, cellPadding: 5, overflow: 'linebreak' },
+        columnStyles: { 
+            0: { cellWidth: 15 }, 
+            1: { cellWidth: 'auto' }, 
+            2: { cellWidth: 35 }, 
+            3: { cellWidth: 35 }, 
+            4: { cellWidth: 25, textColor: [220, 53, 69], fontStyle: 'bold' } 
+        },
+        headStyles: { fillColor: [217, 123, 123], textColor: 255 },
+        alternateRowStyles: { fillColor: [253, 246, 246] }
+    });
 }
 
 function generatePdf() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     
-    // Apply background watermark grid
-    addWatermark(doc);
-    
-    // --------------------------------------------------
-    // Title & User Info
-    // --------------------------------------------------
-    doc.setFontSize(22);
+    // 1. JLPT Practice Report Title
+    doc.setFontSize(26);
     doc.setFont(undefined, 'bold');
     doc.text("JLPT Practice Report", 14, 25);
     
-    doc.setFontSize(12);
+    // 2. User Info Section
+    doc.setFontSize(11);
     doc.setFont(undefined, 'normal');
     
-    const infoStartY = 35;
-    doc.text(`Name: ${globalReportData.user.username}`, 14, infoStartY);
-    doc.text(`Level: ${globalReportData.level}`, 14, infoStartY + 8);
-    doc.text(`Score: ${globalReportData.score}%`, 14, infoStartY + 16);
-    doc.text(`Result: ${globalReportData.correct} Correct, ${globalReportData.total - globalReportData.correct} Incorrect out of ${globalReportData.total}`, 14, infoStartY + 24);
-    doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, infoStartY + 32);
+    doc.text(`Name: ${globalReportData.user.username}`, 14, 40);
+    doc.text(`Level: ${globalReportData.level}`, 14, 46);
+    doc.text(`Score: ${globalReportData.score}% (${globalReportData.correct}/${globalReportData.total})`, 14, 52);
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, 58);
     
-    // --------------------------------------------------
-    // Centered Visual Chart Canvas Export
-    // --------------------------------------------------
-    const chartCanvas = document.getElementById('scoreChart');
-    if (chartCanvas) {
-        const chartImgData = chartCanvas.toDataURL('image/png');
-        // Center the image horizontally. Image size approx 50x50
-        const imgWidth = 50;
-        const imgHeight = 50;
-        const pageWidth = doc.internal.pageSize.getWidth();
-        const xPos = (pageWidth - imgWidth) / 2;
-        
-        doc.addImage(chartImgData, 'PNG', xPos, infoStartY, imgWidth, imgHeight);
-    }
+    // 3. Performance Overview (Graph using native shapes)
+    let currentY = generateScoreChart(doc, 75);
     
-    let currentY = infoStartY + 60; // below the chart and info
+    // 4. Correct Answers Table (Green section)
+    generateCorrectTable(doc, currentY);
     
-    // --------------------------------------------------
-    // Table 1: Correct Answers
-    // --------------------------------------------------
-    addSectionTitle(doc, "Correct Answers", currentY);
-    currentY += 8;
-    
-    const correctTableData = globalReportData.correctContext.map(q => [
-        `Q${q.id}`, 
-        q.question,
-        q.answer
-    ]);
-    
-    doc.autoTable({
-        startY: currentY,
-        head: [['ID', 'Question', 'Correct Answer']],
-        body: correctTableData,
-        theme: 'striped',
-        styles: { 
-            fontSize: 10,
-            overflow: 'linebreak',
-            cellPadding: 4
-        },
-        columnStyles: {
-            0: { cellWidth: 15 },
-            1: { cellWidth: 'auto' },
-            2: { cellWidth: 40 }
-        },
-        headStyles: { fillColor: [74, 111, 165], textColor: [255, 255, 255] },
-        didDrawPage: function (data) {
-            // Apply watermark on new pages created by autoTable
-             if (data.pageNumber > 1) {
-                // To avoid drawing over table headers on new pages, we inject it below the table layer
-                // However, jsPDF draws sequentially. We can just draw over safely since it's 15% opacity.
-                addWatermark(doc);
-             }
-        }
-    });
-
-    currentY = doc.lastAutoTable.finalY + 15;
-    
-    // Need to check if there is enough space to start Table 2, otherwise add new page
-    if (currentY > doc.internal.pageSize.getHeight() - 40) {
-        doc.addPage();
-        addWatermark(doc);
-        currentY = 20;
-    }
-
-    // --------------------------------------------------
-    // Table 2: Incorrect Answers
-    // --------------------------------------------------
-    addSectionTitle(doc, "Incorrect Answers", currentY);
-    currentY += 8;
-    
-    const incorrectTableData = globalReportData.incorrectContext.map(q => [
-        `Q${q.id}`, 
-        q.question,
-        q.userAnswer,
-        q.answer
-    ]);
-    
-    doc.autoTable({
-        startY: currentY,
-        head: [['ID', 'Question', 'Your Answer', 'Correct Answer']],
-        body: incorrectTableData,
-        theme: 'grid',
-        styles: { 
-            fontSize: 10,
-            overflow: 'linebreak',
-            cellPadding: 4
-        },
-        columnStyles: {
-            0: { cellWidth: 15 },
-            1: { cellWidth: 'auto' },
-            2: { cellWidth: 35 },
-            3: { cellWidth: 35 }
-        },
-        headStyles: { fillColor: [217, 123, 123], textColor: [255, 255, 255] }, // muted red
-        alternateRowStyles: { fillColor: [250, 245, 245] },
-        didDrawPage: function (data) {
-             if (data.pageNumber > doc.internal.getNumberOfPages() - 1) {
-                // Actually the didDrawPage Hook applies per page. 
-                // Using autoTable, we just need to ensure the watermark is there 
-                // But autoTable creates pages before our hook if we don't handle it in willDrawPage or page break.
-                // We'll safely add watermark if this is a newly created page.
-             }
-        }
-    });
-    
+    // 5. Wrong Answers Table (Red section)
     currentY = doc.lastAutoTable.finalY + 20;
+    generateWrongTable(doc, currentY);
     
-    // --------------------------------------------------
-    // Footer / Motivational Message
-    // --------------------------------------------------
-    // Ensure space for footer
-    if (currentY > doc.internal.pageSize.getHeight() - 30) {
-        doc.addPage();
-        addWatermark(doc);
-        currentY = 40;
+    // 6. Draw Watermark Layer on all existing pages dynamically
+    const totalPages = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+        doc.setPage(i);
+        generateWatermark(doc);
     }
     
+    // Append Motivational Quote precisely at the end
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)].replace(/\n/g, " - ");
     const finalMessage = `七転び八起き – Fall down seven times, stand up eight.\n\n${randomQuote}`;
     
-    doc.setFontSize(11);
+    let footerY = doc.lastAutoTable.finalY + 30;
+    if (footerY > doc.internal.pageSize.getHeight() - 40) {
+        doc.addPage();
+        generateWatermark(doc);
+        footerY = 40;
+    }
+    
+    doc.setPage(doc.internal.getNumberOfPages()); // Ensure we are on last page
+    doc.setFontSize(12);
     doc.setFont(undefined, 'italic');
-    doc.setTextColor(100, 100, 100);
-    
+    doc.setTextColor(120, 120, 120);
     const splitText = doc.splitTextToSize(finalMessage, doc.internal.pageSize.getWidth() - 28);
-    doc.text(splitText, doc.internal.pageSize.getWidth() / 2, currentY, { align: 'center' });
-    
+    doc.text(splitText, doc.internal.pageSize.getWidth() / 2, footerY, { align: 'center' });
+
     doc.save(`jlpt_${globalReportData.level}_report.pdf`);
 }
 
@@ -433,8 +347,6 @@ async function sendEmailReport(data) {
             score: data.score,
             correctAnswers: data.correctContext.map(q => `Q${q.id}: ${q.answer}`)
         };
-        
-        // This will POST to the relative /api/send-report, which Cloudflare Pages will map to the Worker.
         const res = await fetch('/api/send-report', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
