@@ -1,0 +1,52 @@
+<!DOCTYPE strict>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - JLPT Simulation</title>
+    <meta name="description" content="Login or register locally to your JLPT practice simulator.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 80px auto;
+        }
+        .error-msg {
+            color: var(--danger-color);
+            margin-bottom: 15px;
+            display: none;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">JLPT Platform</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="login-container card fade-in">
+            <h2>Welcome Back</h2>
+            <p style="font-size: 0.9rem">Enter a username and passcode. If it doesn't exist, we'll create a local session for you.</p>
+            
+            <div class="error-msg" id="errorMsg"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" required placeholder="example: student99">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" required placeholder="admin/jlptpassword or anything">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login / Enter</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>

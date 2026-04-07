@@ -1,0 +1,14 @@
+{
+  "level": "N5",
+  "questions": [
+    {
+      "id": 1,
+      "type": "reading",
+      "question": "Insert question text here",
+      "image": "",
+      "audio": "",
+      "options": ["A", "B", "C", "D"],
+      "answer": "A"
+    }
+  ]
+}

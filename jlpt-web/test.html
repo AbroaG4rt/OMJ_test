@@ -1,0 +1,130 @@
+<!DOCTYPE strict>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JLPT Test Environment</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .timer-badge {
+            background: var(--danger-color);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: sticky;
+            top: 15px;
+        }
+        .question-block {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+        .option-item {
+            margin-bottom: 10px;
+        }
+        .option-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            transition: all 0.2s ease;
+        }
+        .option-label:hover {
+            background-color: #f7f9fc;
+            border-color: var(--primary-color);
+        }
+        .option-label input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+            accent-color: var(--primary-color);
+        }
+        .pagination-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+        }
+        .progress-indicator {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        
+        /* Lazy Loading Audio UI */
+        .audio-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8f9fa;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            width: fit-content;
+            margin-bottom: 15px;
+        }
+        .audio-play-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .audio-play-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container test-header">
+            <div class="logo" id="levelIndicator">JLPT</div>
+            <div class="timer-badge" id="timerBadge">00:00:00</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Anti cheat warning -->
+        <div id="cheatWarning" class="card" style="display:none; background: #fff3f3; border-color: var(--danger-color); color: var(--danger-color);">
+            <strong>Warning:</strong> Switching tabs is detected. Please stay focused on the test.
+        </div>
+
+        <div class="card" id="testContainer">
+            <div id="loadingIndicator">Loading questions...</div>
+            <div id="questionWrapper"></div>
+            
+            <div class="pagination-controls">
+                <button class="btn btn-outline" id="prevBtn" style="display:none;">Previous</button>
+                <div class="progress-indicator" id="progressIndicator">Page 1 / 1</div>
+                <button class="btn btn-primary" id="nextBtn" style="display:none;">Next</button>
+                <button class="btn btn-success" id="submitBtn" style="display:none; background: var(--success-color); color:#fff; border:none;">Submit Test</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/js/test.js"></script>
+</body>
+</html>
